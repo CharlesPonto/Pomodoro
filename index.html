@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pomodoro</title>
+
+    <style>
+        .container {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 80vh;
+        }
+
+        .container-items {
+            background-color: rgba(84, 255, 84, 0.33);
+            border-radius: 10px;
+            width: 500px;
+            height: 400px;
+            box-shadow: 5px 5px 10px hsla(0, 0%, 0%, 0.155);
+            display: flex;
+            flex-direction: column;
+            justify-content: space-around;
+            align-items: center;
+            padding: 10px;
+        }
+
+        #timeDisplay {
+            font-size: 5rem;
+            font-family: Arial, Helvetica, sans-serif;
+        }
+
+        button {
+            padding: 10px 15px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="container">
+        <div class="container-items">
+            <div>
+                <button class="todo-btn">Pomodoro</button>
+                <button class="todo-btn">Working</button>
+                <button class="todo-btn">Working</button>
+            </div>
+
+            <div id="timeDisplay">
+                25:00
+            </div>
+
+            <div>
+                <button id="start" onclick="startBtn()">START</button>
+            </div>
+        </div>
+    </div>
+
+
+    <script>
+        let timeDisplay = document.getElementById("timeDisplay");
+        let minutes = 25, seconds = 0;
+
+        function startBtn() {
+            if (seconds === 0) {
+                minutes--;
+                seconds = 60;
+            }
+            if (seconds > 60) {
+                seconds = 0;
+            }
+
+            if (seconds > 0 || seconds < 60) {
+                seconds--;
+            }
+
+            if (minutes == "00" && seconds == "00") {
+                timeDisplay = "Break time!"
+            }
+
+            timeDisplay.textContent = `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+        }
+
+        setInterval(() => {
+            startBtn();
+        }, 1)
+
+    </script>
+</body>
+
+</html>
